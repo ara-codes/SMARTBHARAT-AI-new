@@ -1,0 +1,451 @@
+/* Smart Bharat AI Issue Filing and Complaint Tracker styles */
+
+.form-container {
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.textarea-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.char-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+/* Custom Image Drag and Drop Zone */
+.file-dropzone {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--bg-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-dropzone:hover, 
+.file-dropzone.dragover {
+  border-color: var(--primary);
+  background-color: var(--primary-glow);
+}
+
+.dropzone-icon {
+  font-size: var(--font-size-3xl);
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  transition: color var(--transition-fast);
+}
+
+.file-dropzone:hover .dropzone-icon {
+  color: var(--primary);
+}
+
+.file-dropzone p span {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.file-rules {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.hidden-input {
+  display: none !important;
+}
+
+.file-preview-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-tertiary);
+}
+
+.file-preview-wrapper img {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.remove-photo-btn {
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+/* Interactive Coordinate Map Picker Grid */
+.grid-map-container {
+  height: 240px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: radial-gradient(circle, var(--border-color) 1px, transparent 1px) 0 0 / 20px 20px, var(--bg-tertiary);
+  position: relative;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.grid-map-container:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.map-grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Let user click grid directly */
+}
+
+.landmark {
+  position: absolute;
+  padding: 4px 8px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.landmark i {
+  color: var(--primary);
+}
+
+.landmark.school { top: 30px; left: 50px; }
+.landmark.hospital { bottom: 40px; right: 60px; }
+.landmark.station { top: 120px; left: 320px; }
+
+.map-pin {
+  position: absolute;
+  font-size: 24px;
+  color: #ef4444;
+  transform: translate(-50%, -100%);
+  animation: bounceIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.field-instruction {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, var(--accent-saffron), var(--primary));
+  color: #ffffff;
+  border: none;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: opacity var(--transition-fast);
+}
+
+.submit-btn:hover {
+  opacity: 0.95;
+}
+
+[data-contrast="high"] .submit-btn {
+  background: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* Complaint Tracking Board filter header */
+.tracker-filters {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-box i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.search-box input {
+  padding-left: 40px;
+}
+
+.filter-options {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.filter-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+[data-contrast="high"] .filter-btn.active {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* Complaint Cards layout */
+.complaints-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.complaint-card {
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--border-color);
+  transition: transform var(--transition-fast);
+}
+
+.complaint-card:hover {
+  transform: translateY(-2px);
+}
+
+.complaint-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.complaint-id {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: var(--font-size-sm);
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.status-submitted { background-color: var(--status-submitted-bg); color: var(--status-submitted-text); }
+.status-assigned { background-color: var(--status-assigned-bg); color: var(--status-assigned-text); }
+.status-inprogress { background-color: var(--status-progress-bg); color: var(--status-progress-text); }
+.status-resolved { background-color: var(--status-resolved-bg); color: var(--status-resolved-text); }
+
+.complaint-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.complaint-desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.complaint-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.complaint-meta span i {
+  margin-right: 4px;
+}
+
+/* Stepper Timeline Tracker inside card */
+.complaint-tracker-link {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.complaint-tracker-link:hover {
+  text-decoration: underline;
+}
+
+.timeline-wrapper {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+
+.timeline-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 20px;
+  width: 2px;
+  background-color: var(--border-color);
+}
+
+.timeline-step {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.timeline-step.completed .timeline-circle {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.timeline-step.current .timeline-circle {
+  background-color: var(--bg-secondary);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.timeline-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.timeline-status {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.timeline-date {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.timeline-notes {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Empty records placeholder style */
+.no-records-card {
+  padding: 3rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.empty-icon {
+  font-size: 3.5rem;
+  color: var(--text-muted);
+}
+
+@keyframes bounceIn {
+  0% { opacity: 0; transform: translate(-50%, -100%) scale(0.3); }
+  50% { opacity: 0.9; transform: translate(-50%, -100%) scale(1.1); }
+  80% { opacity: 1; transform: translate(-50%, -100%) scale(0.89); }
+  100% { opacity: 1; transform: translate(-50%, -100%) scale(1); }
+}

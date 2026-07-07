@@ -1,0 +1,155 @@
+/* Smart Bharat AI - Design Tokens */
+:root {
+  /* Colors - Light Theme (Default) */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  --primary: #0033a0;          /* Ashoka Blue */
+  --primary-light: #1e40af;
+  --primary-glow: rgba(0, 51, 160, 0.1);
+  
+  --accent-saffron: #ff9933;   /* Saffron */
+  --accent-saffron-glow: rgba(255, 153, 51, 0.15);
+  --accent-green: #128807;     /* Green */
+  --accent-green-glow: rgba(18, 136, 7, 0.15);
+  
+  --border-color: #e2e8f0;
+  --border-focus: #3b82f6;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 15px rgba(0, 51, 160, 0.1);
+  
+  /* Status Colors */
+  --status-submitted-bg: #eff6ff;
+  --status-submitted-text: #1d4ed8;
+  --status-assigned-bg: #fef3c7;
+  --status-assigned-text: #d97706;
+  --status-progress-bg: #faf5ff;
+  --status-progress-text: #7c3aed;
+  --status-resolved-bg: #ecfdf5;
+  --status-resolved-text: #047857;
+  
+  /* Accessibility Font Scales */
+  --font-scale: 1;
+  --font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-dyslexic: 'OpenDyslexic', 'Comic Sans MS', cursive, sans-serif;
+  --font-family: var(--font-family-base);
+  --line-height-multiplier: 1.5;
+  --letter-spacing-multiplier: 0;
+  
+  /* Layout Spacing */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  --font-size-xs: calc(0.75rem * var(--font-scale));
+  --font-size-sm: calc(0.875rem * var(--font-scale));
+  --font-size-base: calc(1rem * var(--font-scale));
+  --font-size-lg: calc(1.125rem * var(--font-scale));
+  --font-size-xl: calc(1.25rem * var(--font-scale));
+  --font-size-2xl: calc(1.5rem * var(--font-scale));
+  --font-size-3xl: calc(1.875rem * var(--font-scale));
+  --font-size-4xl: calc(2.25rem * var(--font-scale));
+}
+
+/* Dark Mode Tokens */
+[data-theme="dark"] {
+  --bg-primary: #0b0f19;
+  --bg-secondary: #131c2e;
+  --bg-tertiary: #1e293b;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  
+  --primary: #3b82f6;          /* Bright Blue for Dark Mode accessibility */
+  --primary-light: #60a5fa;
+  --primary-glow: rgba(59, 130, 246, 0.15);
+  
+  --accent-saffron: #f97316;
+  --accent-saffron-glow: rgba(249, 115, 22, 0.2);
+  --accent-green: #10b981;
+  --accent-green-glow: rgba(16, 185, 129, 0.2);
+  
+  --border-color: #334155;
+  --border-focus: #60a5fa;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.15);
+  
+  --status-submitted-bg: rgba(29, 78, 216, 0.2);
+  --status-submitted-text: #93c5fd;
+  --status-assigned-bg: rgba(217, 119, 6, 0.2);
+  --status-assigned-text: #fcd34d;
+  --status-progress-bg: rgba(124, 58, 237, 0.2);
+  --status-progress-text: #d8b4fe;
+  --status-resolved-bg: rgba(4, 120, 87, 0.2);
+  --status-resolved-text: #6ee7b7;
+}
+
+/* High Contrast Mode Tokens */
+[data-contrast="high"] {
+  --bg-primary: #000000 !important;
+  --bg-secondary: #000000 !important;
+  --bg-tertiary: #121212 !important;
+  
+  --text-primary: #ffffff !important;
+  --text-secondary: #ffffff !important;
+  --text-muted: #ffff00 !important; /* Yellow for muted text in dark high contrast */
+  
+  --primary: #ffff00 !important;    /* Yellow for high visibility links/buttons */
+  --primary-light: #ffff00 !important;
+  --primary-glow: rgba(255, 255, 0, 0.3) !important;
+  
+  --accent-saffron: #ffffff !important;
+  --accent-saffron-glow: rgba(255, 255, 255, 0.3) !important;
+  --accent-green: #ffffff !important;
+  --accent-green-glow: rgba(255, 255, 255, 0.3) !important;
+  
+  --border-color: #ffffff !important;
+  --border-focus: #ffff00 !important;
+  
+  --status-submitted-bg: #000000 !important;
+  --status-submitted-text: #ffffff !important;
+  --status-assigned-bg: #000000 !important;
+  --status-assigned-text: #ffffff !important;
+  --status-progress-bg: #000000 !important;
+  --status-progress-text: #ffffff !important;
+  --status-resolved-bg: #000000 !important;
+  --status-resolved-text: #ffffff !important;
+  
+  --shadow-sm: none !important;
+  --shadow-md: none !important;
+  --shadow-lg: none !important;
+  --shadow-glow: none !important;
+}
+
+/* Dyslexic Friendly overrides */
+[data-font="dyslexic"] {
+  --font-family: var(--font-family-dyslexic) !important;
+  --line-height-multiplier: 1.8 !important;
+  --letter-spacing-multiplier: 0.12em !important;
+}
+
+/* Apply fonts globally */
+body {
+  font-family: var(--font-family);
+  line-height: var(--line-height-multiplier);
+  letter-spacing: var(--letter-spacing-multiplier);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}

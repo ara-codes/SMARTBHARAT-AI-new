@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Bharat AI - A modern GenAI-powered civic platform for Indian citizens to access government services, report public issues, simplify documents, and more.">
+  <title>Smart Bharat AI - Citizen Civic Platform</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/issues.css">
+  <link rel="stylesheet" href="css/services.css">
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Banner / Navigation -->
+  <header class="app-header">
+    <div class="logo-container" role="banner">
+      <div class="tricolor-badge">
+        <span class="saffron"></span>
+        <span class="white"><span class="chakra">☸</span></span>
+        <span class="green"></span>
+      </div>
+      <h1 class="logo-text">Smart Bharat <span class="ai-badge">AI</span></h1>
+    </div>
+    
+    <!-- Accessibility Toolbar -->
+    <div class="accessibility-toolbar" aria-label="Accessibility Settings">
+      <button id="btn-tts" class="access-btn" title="Toggle Screen Reader / Text-to-Speech (Alt+T)" aria-label="Toggle Screen Reader">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
+      <button id="btn-contrast" class="access-btn" title="Toggle High Contrast Mode (Alt+C)" aria-label="Toggle High Contrast Mode">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+      </button>
+      <button id="btn-font-dec" class="access-btn" title="Decrease Font Size" aria-label="Decrease Font Size">
+        A-
+      </button>
+      <button id="btn-font-inc" class="access-btn" title="Increase Font Size" aria-label="Increase Font Size">
+        A+
+      </button>
+      <button id="btn-dyslexia" class="access-btn font-dyslexia-preview" title="Toggle Dyslexia-Friendly Font (Alt+D)" aria-label="Toggle Dyslexia Font">
+        Abc
+      </button>
+      <button id="btn-theme" class="access-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Mode">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <nav class="nav-menu" role="navigation" aria-label="Main Navigation">
+        <button class="nav-item active" data-tab="dashboard" aria-controls="tab-dashboard" aria-selected="true">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-tab="ai-companion" aria-controls="tab-ai-companion" aria-selected="false">
+          <i class="fa-solid fa-robot"></i>
+          <span>Smart Bharat AI</span>
+        </button>
+        <button class="nav-item" data-tab="report-issue" aria-controls="tab-report-issue" aria-selected="false">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>Report Civic Issue</span>
+        </button>
+        <button class="nav-item" data-tab="track-complaints" aria-controls="tab-track-complaints" aria-selected="false">
+          <i class="fa-solid fa-list-check"></i>
+          <span>Complaint Tracker</span>
+        </button>
+        <button class="nav-item" data-tab="services-wizard" aria-controls="tab-services-wizard" aria-selected="false">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Services Wizard</span>
+        </button>
+        <button class="nav-item" data-tab="document-simplifier" aria-controls="tab-document-simplifier" aria-selected="false">
+          <i class="fa-solid fa-file-invoice"></i>
+          <span>Legalese Simplifier</span>
+        </button>
+      </nav>
+      
+      <!-- Footer Info inside sidebar -->
+      <footer class="sidebar-footer">
+        <p>National Informatics Portal</p>
+        <p class="footer-meta">Digital India Initiative &copy; 2026</p>
+      </footer>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="app-content" id="main-content" tabindex="-1">
+      
+      <!-- Section 1: Dashboard -->
+      <section id="tab-dashboard" class="tab-panel active" role="tabpanel" aria-labelledby="nav-dashboard">
+        <div class="panel-header">
+          <h2>Civic Overview & Transparency Dashboard</h2>
+          <p>Real-time updates on community issues resolved, service metrics, and public transparency.</p>
+        </div>
+        
+        <!-- Live Ticker Stats -->
+        <div class="metrics-grid">
+          <div class="metric-card glass">
+            <div class="metric-icon saffron-bg"><i class="fa-solid fa-square-poll-horizontal"></i></div>
+            <div class="metric-info">
+              <span class="metric-label">Today's Complaints</span>
+              <h3 id="stat-today-complaints" class="metric-value">0</h3>
+            </div>
+          </div>
+          <div class="metric-card glass">
+            <div class="metric-icon blue-bg"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div class="metric-info">
+              <span class="metric-label">Pending Complaints</span>
+              <h3 id="stat-pending-complaints" class="metric-value">0</h3>
+            </div>
+          </div>
+          <div class="metric-card glass">
+            <div class="metric-icon green-bg"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="metric-info">
+              <span class="metric-label">Resolved Complaints</span>
+              <h3 id="stat-resolved-complaints" class="metric-value">0</h3>
+            </div>
+          </div>
+          <div class="metric-card glass">
+            <div class="metric-icon purple-bg"><i class="fa-solid fa-hourglass-half"></i></div>
+            <div class="metric-info">
+              <span class="metric-label">Avg. Resolution Time</span>
+              <h3 id="stat-resolution-time" class="metric-value">24h</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Charts & Breakdown -->
+        <div class="dashboard-layout">
+          <!-- Department Statistics (SVG Chart) -->
+          <div class="dashboard-card glass">
+            <h4>Department-wise Complaints</h4>
+            <div class="chart-container" id="dept-chart-container">
+              <!-- SVG dynamic bar chart rendering here -->
+            </div>
+          </div>
+          
+          <!-- Citizen Satisfaction (SVG Semi-Circle Gauge) -->
+          <div class="dashboard-card glass text-center">
+            <h4>Citizen Satisfaction Index</h4>
+            <div class="gauge-container" id="satisfaction-gauge-container">
+              <!-- SVG Gauge rendering here -->
+            </div>
+            <div class="gauge-details">
+              <h3 id="satisfaction-score">87%</h3>
+              <p>Based on citizen feedback after issue resolution</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Content Rows -->
+        <div class="dashboard-layout second-row">
+          <!-- Recent Announcements -->
+          <div class="dashboard-card glass scrollable-card">
+            <h4>Public Circulars & AI Bulletins</h4>
+            <div class="announcements-list">
+              <div class="announcement-item">
+                <span class="badge saffron-badge">New Notification</span>
+                <h5>Ayushman Bharat Eligibility Expansion</h5>
+                <p>Government broadens free health coverage to senior citizens above 70 years. <a href="#" class="simplify-trigger" data-simplifier-type="ayushman">Simplify Legalese <i class="fa-solid fa-arrow-right"></i></a></p>
+                <small>Published: 05 July 2026</small>
+              </div>
+              <div class="announcement-item">
+                <span class="badge green-badge">DigiLocker</span>
+                <h5>Integration with Driving License</h5>
+                <p>New regulations state DigiLocker-stored digital licenses hold equal legal weight to physical copies. <a href="#" class="simplify-trigger" data-simplifier-type="digilocker">Simplify Legalese <i class="fa-solid fa-arrow-right"></i></a></p>
+                <small>Published: 02 July 2026</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Visited Services -->
+          <div class="dashboard-card glass">
+            <h4>Top Accessed Public Services</h4>
+            <ul class="top-services-list">
+              <li>
+                <span class="service-rank">1</span>
+                <span class="service-name">Aadhaar Address Update</span>
+                <span class="service-hits"><i class="fa-solid fa-fire"></i> High Traffic</span>
+              </li>
+              <li>
+                <span class="service-rank">2</span>
+                <span class="service-name">Ayushman Card Registration</span>
+                <span class="service-hits"><i class="fa-solid fa-users"></i> 1.2M citizens</span>
+              </li>
+              <li>
+                <span class="service-rank">3</span>
+                <span class="service-name">Passport Seva Online</span>
+                <span class="service-hits"><i class="fa-solid fa-circle-check"></i> Instant Booking</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Smart Bharat AI Assistant -->
+      <section id="tab-ai-companion" class="tab-panel" role="tabpanel" aria-labelledby="nav-ai-companion">
+        <div class="panel-header">
+          <h2>Smart Bharat AI Assistant</h2>
+          <p>Your intelligent, multilingual guide to citizen services, documentation, and processes. (Supports English & Hindi)</p>
+        </div>
+        
+        <div class="chat-wrapper glass">
+          <!-- Chat Language Selection -->
+          <div class="chat-header-bar">
+            <div class="status-indicator">
+              <span class="pulse-dot"></span>
+              <span>AI Companion Online</span>
+            </div>
+            <div class="lang-selector">
+              <label for="chat-lang">Language / भाषा: </label>
+              <select id="chat-lang" aria-label="Select Chat Language">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Messages Area -->
+          <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
+            <div class="message bot">
+              <div class="message-content">
+                Namaste! I am your <strong>Smart Bharat AI</strong> companion. How can I assist you with Indian Government Services today?
+                <br><br>
+                नमस्ते! मैं आपका <strong>स्मार्ट भारत एआई</strong> सहायक हूँ। आज मैं भारतीय सरकारी सेवाओं के बारे में आपकी क्या मदद कर सकता हूँ?
+              </div>
+              <span class="message-time">Just now</span>
+            </div>
+          </div>
+
+          <!-- Suggestion Chips -->
+          <div class="suggestion-chips" id="suggestion-chips">
+            <button class="chip" data-query="How to update Aadhaar Address?">Aadhaar Address Update</button>
+            <button class="chip" data-query="Ayushman Bharat card eligibility check">Ayushman Bharat Eligibility</button>
+            <button class="chip" data-query="Documents needed for fresh Passport?">Fresh Passport Checklist</button>
+            <button class="chip" data-query="कम्पलेंट कैसे दर्ज करें?">शिकायत कैसे दर्ज करें?</button>
+          </div>
+
+          <!-- Input Bar -->
+          <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Ask about Aadhaar, Passport, PM-Kisan, and more..." aria-label="Type message to Smart Bharat AI">
+            <button id="chat-btn-voice" class="chat-voice-btn" title="Speak text" aria-label="Voice input">
+              <i class="fa-solid fa-microphone"></i>
+            </button>
+            <button id="chat-btn-send" class="chat-send-btn" title="Send message" aria-label="Send message">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Issue Reporting -->
+      <section id="tab-report-issue" class="tab-panel" role="tabpanel" aria-labelledby="nav-report-issue">
+        <div class="panel-header">
+          <h2>Report a Civic Issue</h2>
+          <p>Submit public infrastructure grievances directly to the concerned municipal department. Submissions are secured and validated.</p>
+        </div>
+
+        <div class="form-container glass">
+          <form id="issue-form" novalidate>
+            <div class="form-row">
+              <!-- Department Select -->
+              <div class="form-group">
+                <label for="issue-department">Concerned Department <span class="required">*</span></label>
+                <select id="issue-department" required>
+                  <option value="" disabled selected>Select Department</option>
+                  <option value="Municipal Corporation">Municipal Corporation</option>
+                  <option value="PWD">PWD (Public Works Dept)</option>
+                  <option value="Water Department">Water Department</option>
+                  <option value="Electricity Board">Electricity Board</option>
+                  <option value="Transport Department">Transport Department</option>
+                </select>
+                <span class="error-msg" id="err-department"></span>
+              </div>
+
+              <!-- Issue Type Select -->
+              <div class="form-group">
+                <label for="issue-type">Issue / Complaint Type <span class="required">*</span></label>
+                <select id="issue-type" required disabled>
+                  <option value="" disabled selected>Select Category First</option>
+                </select>
+                <span class="error-msg" id="err-type"></span>
+              </div>
+            </div>
+
+            <!-- Title / Brief Description -->
+            <div class="form-group">
+              <label for="issue-title">Complaint Title <span class="required">*</span></label>
+              <input type="text" id="issue-title" placeholder="e.g., Deep pothole in middle of Main Road" max-length="100" required>
+              <span class="error-msg" id="err-title"></span>
+            </div>
+
+            <!-- Detailed Description -->
+            <div class="form-group">
+              <label for="issue-description">Detailed Description <span class="required">*</span></label>
+              <textarea id="issue-description" rows="4" placeholder="Describe the problem, approximate size, potential safety hazards, or landmark..." required></textarea>
+              <div class="textarea-footer">
+                <span class="error-msg" id="err-description"></span>
+                <span class="char-count" id="desc-char-count">0 / 500 characters</span>
+              </div>
+            </div>
+
+            <!-- Upload Evidence -->
+            <div class="form-group">
+              <label>Evidence Photograph (Optional)</label>
+              <div class="file-dropzone" id="file-dropzone">
+                <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+                <p>Drag and drop or <span>click to browse</span></p>
+                <span class="file-rules">Accepts JPG, PNG, WEBP (Max size: 2MB)</span>
+                <input type="file" id="issue-photo" accept="image/jpeg, image/png, image/webp" class="hidden-input">
+              </div>
+              <div id="file-preview-container" class="file-preview-wrapper hidden">
+                <img id="file-preview-img" src="" alt="Selected civic issue preview">
+                <button type="button" id="btn-remove-photo" class="remove-photo-btn" aria-label="Remove image">
+                  <i class="fa-solid fa-xmark"></i> Remove
+                </button>
+              </div>
+              <span class="error-msg" id="err-photo"></span>
+            </div>
+
+            <!-- Location Selection -->
+            <div class="form-group">
+              <label>Location Placement <span class="required">*</span></label>
+              <p class="field-instruction">Click on the grid to pin the exact site coordinate.</p>
+              <div class="grid-map-container" id="grid-map-container" tabindex="0" role="application" aria-label="Map Coordinate Selector">
+                <div class="map-grid-overlay">
+                  <span class="landmark school"><i class="fa-solid fa-school"></i> Govt School</span>
+                  <span class="landmark hospital"><i class="fa-solid fa-hospital"></i> Civil Hospital</span>
+                  <span class="landmark station"><i class="fa-solid fa-train-subway"></i> Metro Station</span>
+                </div>
+                <div id="map-pin" class="map-pin hidden"><i class="fa-solid fa-location-dot"></i></div>
+              </div>
+              <input type="hidden" id="issue-coords" value="" required>
+              <span class="error-msg" id="err-coords"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+              <button type="submit" class="submit-btn" id="btn-submit-issue">
+                <i class="fa-solid fa-paper-plane"></i> File Complaint
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Section 4: Complaint Tracker -->
+      <section id="tab-track-complaints" class="tab-panel" role="tabpanel" aria-labelledby="nav-track-complaints">
+        <div class="panel-header">
+          <h2>Complaint Tracking Board</h2>
+          <p>Check the live progress of filed civic grievances. Updates synchronize with municipal worker systems.</p>
+        </div>
+
+        <div class="tracker-filters glass">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="tracker-search" placeholder="Search by Complaint ID or Title..." aria-label="Search complaints">
+          </div>
+          <div class="filter-options">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Submitted">Submitted</button>
+            <button class="filter-btn" data-filter="Assigned">Assigned</button>
+            <button class="filter-btn" data-filter="In Progress">In Progress</button>
+            <button class="filter-btn" data-filter="Resolved">Resolved</button>
+          </div>
+        </div>
+
+        <div class="complaints-list-wrapper" id="complaints-list">
+          <!-- Cards injected via JS -->
+          <div class="no-records-card text-center glass">
+            <i class="fa-solid fa-folder-open empty-icon"></i>
+            <h3>No complaints filed yet</h3>
+            <p>Go to the 'Report Civic Issue' section to submit your first grievance.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Services Eligibility Wizard -->
+      <section id="tab-services-wizard" class="tab-panel" role="tabpanel" aria-labelledby="nav-services-wizard">
+        <div class="panel-header">
+          <h2>Government Services Eligibility Wizard</h2>
+          <p>Complete a quick profile questionnaire to receive personalized recommendation of eligible welfare schemes and needed documentation.</p>
+        </div>
+
+        <div class="wizard-container glass">
+          <!-- Steps Navigation -->
+          <div class="wizard-steps-header">
+            <div class="step-indicator active" id="step-ind-1">
+              <span class="step-num">1</span>
+              <span class="step-text">Personal Details</span>
+            </div>
+            <div class="step-indicator" id="step-ind-2">
+              <span class="step-num">2</span>
+              <span class="step-text">Income & Status</span>
+            </div>
+            <div class="step-indicator" id="step-ind-3">
+              <span class="step-num">3</span>
+              <span class="step-text">Recommendations</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Personal Details Form -->
+          <div class="wizard-step-panel active" id="wizard-step-1">
+            <form id="wizard-form-1">
+              <div class="form-group">
+                <label for="wiz-age">Age (in years) <span class="required">*</span></label>
+                <input type="number" id="wiz-age" min="1" max="120" required placeholder="Enter your age">
+                <span class="error-msg" id="err-wiz-age"></span>
+              </div>
+              <div class="form-group">
+                <label for="wiz-residency">Residency Status <span class="required">*</span></label>
+                <select id="wiz-residency" required>
+                  <option value="" disabled selected>Are you an Indian Citizen?</option>
+                  <option value="indian">Indian Citizen (Resident)</option>
+                  <option value="nri">Non-Resident Indian (NRI)</option>
+                  <option value="oci">Overseas Citizen of India (OCI)</option>
+                </select>
+                <span class="error-msg" id="err-wiz-residency"></span>
+              </div>
+              <div class="form-group">
+                <label for="wiz-state">State of Residence <span class="required">*</span></label>
+                <select id="wiz-state" required>
+                  <option value="" disabled selected>Select your state</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Tamil Nadu">Tamil Nadu</option>
+                  <option value="Other">Other State</option>
+                </select>
+                <span class="error-msg" id="err-wiz-state"></span>
+              </div>
+              <div class="wizard-actions">
+                <button type="button" class="wizard-btn next-btn" id="btn-wiz-1-next">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 2: Income & Status -->
+          <div class="wizard-step-panel" id="wizard-step-2">
+            <form id="wizard-form-2">
+              <div class="form-group">
+                <label for="wiz-income">Annual Household Income (INR) <span class="required">*</span></label>
+                <select id="wiz-income" required>
+                  <option value="" disabled selected>Select income bracket</option>
+                  <option value="low">Under ₹2,50,000 (Low Income / BPL)</option>
+                  <option value="medium">₹2,50,000 to ₹8,00,000</option>
+                  <option value="high">Above ₹8,00,000</option>
+                </select>
+                <span class="error-msg" id="err-wiz-income"></span>
+              </div>
+              <div class="form-group">
+                <label for="wiz-occupation">Occupation / Category</label>
+                <select id="wiz-occupation">
+                  <option value="general">General Professional / Salaried</option>
+                  <option value="farmer">Farmer / Agricultural Worker</option>
+                  <option value="student">Student</option>
+                  <option value="senior">Retired / Senior Citizen</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Social Category (For specific certificate criteria)</label>
+                <div class="radio-group">
+                  <label><input type="radio" name="wiz-social" value="General" checked> General</label>
+                  <label><input type="radio" name="wiz-social" value="OBC"> OBC</label>
+                  <label><input type="radio" name="wiz-social" value="SC/ST"> SC / ST</label>
+                </div>
+              </div>
+              <div class="wizard-actions">
+                <button type="button" class="wizard-btn prev-btn" id="btn-wiz-2-prev"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                <button type="button" class="wizard-btn next-btn" id="btn-wiz-2-next">Check Eligibility <i class="fa-solid fa-circle-check"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 3: Recommendations Display -->
+          <div class="wizard-step-panel" id="wizard-step-3">
+            <div class="results-header">
+              <h3><i class="fa-solid fa-gift saffron-text"></i> Recommended Services for You</h3>
+              <p>Based on your profile inputs, here are the services you are eligible for, along with document specifications.</p>
+            </div>
+            
+            <div class="wizard-results-layout">
+              <!-- Recommends List -->
+              <div class="recommends-list" id="wizard-recommends-list">
+                <!-- Program Cards injected via JS -->
+              </div>
+              
+              <!-- Documents Checklists Panel -->
+              <div class="docs-checklist-panel glass" id="wizard-docs-panel">
+                <h4>Required Documents Checklist</h4>
+                <p class="muted-text text-sm">Select a service on the left to see required application documents.</p>
+                <div id="docs-checklist-placeholder" class="docs-placeholder text-center">
+                  <i class="fa-solid fa-file-shield text-muted" style="font-size: 2.5rem; margin-bottom: 10px;"></i>
+                  <p>Choose a recommended scheme card</p>
+                </div>
+                <div id="docs-checklist-content" class="hidden">
+                  <h5 id="selected-service-title">Aadhaar Address Update</h5>
+                  <ul class="checklist-items" id="selected-service-checklist">
+                    <!-- Checkboxes injected via JS -->
+                  </ul>
+                  <div class="doc-upload-simulator">
+                    <h6>Document Validation Assistant</h6>
+                    <p class="text-xs muted-text">Simulate drag-and-drop of your document (utility bill, birth cert, etc.) to check formatting validity.</p>
+                    <div class="dropzone-sm" id="wizard-doc-dropzone">
+                      <i class="fa-solid fa-file-import"></i>
+                      <span>Select mock document file</span>
+                      <input type="file" id="wiz-doc-file" class="hidden-input" accept=".pdf, .png, .jpg, .jpeg">
+                    </div>
+                    <div id="wiz-doc-analysis-result" class="analysis-box hidden">
+                      <!-- Analysis results injected here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wizard-actions">
+              <button type="button" class="wizard-btn prev-btn" id="btn-wiz-3-reset"><i class="fa-solid fa-arrow-rotate-left"></i> Restart Wizard</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Document Legalese Simplifier -->
+      <section id="tab-document-simplifier" class="tab-panel" role="tabpanel" aria-labelledby="nav-document-simplifier">
+        <div class="panel-header">
+          <h2>Government Document Legalese Simplifier</h2>
+          <p>Translate complex notifications, legal guidelines, and bureaucratic reports into plain, easy-to-understand summaries.</p>
+        </div>
+
+        <div class="simplifier-container">
+          <!-- Text Input Panel -->
+          <div class="simplifier-card input-card glass">
+            <h4>Paste Official Document Text</h4>
+            <p class="muted-text text-sm">Paste rules, circulars, eligibility conditions, or legal disclaimers.</p>
+            <div class="form-group">
+              <label for="simplifier-text">Legalese Text (English or Hindi)</label>
+              <textarea id="simplifier-text" rows="12" placeholder="Paste the bureaucratic or legal text here (e.g., Aadhaar Act sections, Ayushman eligibility details, tax notifications)..." required></textarea>
+            </div>
+            
+            <div class="simplifier-options">
+              <div class="form-group flex-1">
+                <label for="simplifier-output-lang">Simplify Output Language</label>
+                <select id="simplifier-output-lang">
+                  <option value="en">English (Plain Language)</option>
+                  <option value="hi">हिन्दी (सरल भाषा - Hindi)</option>
+                </select>
+              </div>
+              <button id="btn-simplify-submit" class="simplify-btn-submit">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Simplify Document
+              </button>
+            </div>
+          </div>
+
+          <!-- Simplifier Results Panel -->
+          <div class="simplifier-card output-card glass" id="simplifier-output-panel">
+            <div class="simplifier-placeholder text-center" id="simplifier-output-placeholder">
+              <i class="fa-solid fa-wand-magic empty-icon"></i>
+              <h3>Awaiting Legalese Input</h3>
+              <p>Paste regulatory text in the left panel and click "Simplify Document" to view clean bullet points, fees, and requirements.</p>
+            </div>
+
+            <div class="simplifier-results-content hidden" id="simplifier-results-content">
+              <div class="output-header">
+                <h3><i class="fa-solid fa-circle-check text-green"></i> Simplified Translation</h3>
+                <button id="btn-tts-read-summary" class="read-summary-btn" title="Read Aloud Summary">
+                  <i class="fa-solid fa-volume-high"></i> Listen to Summary
+                </button>
+              </div>
+
+              <!-- Translation outputs -->
+              <div class="summary-section">
+                <h5><i class="fa-solid fa-file-lines font-accent-blue"></i> Easy Summary</h5>
+                <p id="simple-output-summary"></p>
+              </div>
+
+              <div class="grid-2-cols">
+                <div class="summary-section">
+                  <h5><i class="fa-solid fa-circle-info font-accent-saffron"></i> Eligibility Summary</h5>
+                  <p id="simple-output-eligibility"></p>
+                </div>
+                <div class="summary-section">
+                  <h5><i class="fa-solid fa-folder-open font-accent-green"></i> Required Documents</h5>
+                  <p id="simple-output-documents"></p>
+                </div>
+              </div>
+
+              <div class="grid-3-cols">
+                <div class="summary-section">
+                  <h5><i class="fa-solid fa-indian-rupee-sign"></i> Applicable Fees</h5>
+                  <p id="simple-output-fees"></p>
+                </div>
+                <div class="summary-section">
+                  <h5><i class="fa-solid fa-hourglass-half"></i> Processing Timeline</h5>
+                  <p id="simple-output-timeline"></p>
+                </div>
+                <div class="summary-section">
+                  <h5><i class="fa-solid fa-circle-exclamation"></i> Important Notes</h5>
+                  <p id="simple-output-notes"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification Overlay -->
+  <div id="toast" class="toast hidden" role="alert" aria-live="assertive">
+    <div class="toast-content">
+      <i class="fa-solid fa-circle-info toast-icon" id="toast-icon"></i>
+      <span class="toast-message" id="toast-message">Message text goes here</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/ai.js" defer></script>
+  <script src="js/issues.js" defer></script>
+  <script src="js/services.js" defer></script>
+  <script src="js/dashboard.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
